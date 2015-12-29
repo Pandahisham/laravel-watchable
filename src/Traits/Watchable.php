@@ -1,21 +1,20 @@
 <?php
 
-    namespace Tshafer\Watchable\Traits;
+namespace Tshafer\Watchable\Traits;
 
-    use Tshafer\Watchable\Models\Watchlist;
+use Tshafer\Watchable\Models\Watchlist;
 
     /**
      * Class Watchable.
      */
     trait Watchable
     {
-
         /**
          * @return \Illuminate\Database\Eloquent\Relations\MorphMany
          */
         public function watchlists()
         {
-            return $this->morphMany( Watchlist::class, 'author' );
+            return $this->morphMany(Watchlist::class, 'author');
         }
 
         /**
@@ -23,9 +22,9 @@
          *
          * @return mixed
          */
-        public function getWatchlist( $id )
+        public function getWatchlist($id)
         {
-            return $this->watchlists()->find( $id );
+            return $this->watchlists()->find($id);
         }
 
         /**
@@ -33,9 +32,9 @@
          *
          * @return mixed
          */
-        public function getWatchlistBySlug( $slug )
+        public function getWatchlistBySlug($slug)
         {
-            return $this->watchlists()->findBySlug( $slug );
+            return $this->watchlists()->findBySlug($slug);
         }
 
         /**
@@ -43,9 +42,9 @@
          *
          * @return mixed
          */
-        public function getWatchlistByType( $type )
+        public function getWatchlistByType($type)
         {
-            return $this->watchlists()->whereType( $type )->get();
+            return $this->watchlists()->whereType($type)->get();
         }
 
         /**
@@ -53,12 +52,12 @@
          *
          * @return mixed
          */
-        public function createWatchlist( $data )
+        public function createWatchlist($data)
         {
-            $data[ 'author_id' ]   = $this->id;
-            $data[ 'author_type' ] = get_class( $this );
+            $data[ 'author_id' ] = $this->id;
+            $data[ 'author_type' ] = get_class($this);
 
-            return $this->watchlists()->create( $data );
+            return $this->watchlists()->create($data);
         }
 
         /**
@@ -67,15 +66,15 @@
          *
          * @return mixed
          */
-        public function updateWatchlist( $id, $data )
+        public function updateWatchlist($id, $data)
         {
-            if (is_string( $id )) {
-                $wishlist = $this->getWatchlistBySlug( $id );
+            if (is_string($id)) {
+                $wishlist = $this->getWatchlistBySlug($id);
             } else {
-                $wishlist = $this->getWatchlist( $id );
+                $wishlist = $this->getWatchlist($id);
             }
 
-            return $wishlist->update( $data );
+            return $wishlist->update($data);
         }
 
         /**
@@ -83,12 +82,12 @@
          *
          * @return mixed
          */
-        public function deleteWatchlist( $id )
+        public function deleteWatchlist($id)
         {
-            if (is_string( $id )) {
-                $wishlist = $this->getWatchlistBySlug( $id );
+            if (is_string($id)) {
+                $wishlist = $this->getWatchlistBySlug($id);
             } else {
-                $wishlist = $this->getWatchlist( $id );
+                $wishlist = $this->getWatchlist($id);
             }
 
             return $wishlist->delete();

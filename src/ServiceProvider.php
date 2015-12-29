@@ -10,12 +10,10 @@ use Tshafer\ServiceProvider\ServiceProvider as BaseProvider;
  */
 class ServiceProvider extends BaseProvider
 {
-
     /**
      * @var string
      */
     protected $packageName = 'watchable';
-
 
     /**
      *
@@ -24,7 +22,6 @@ class ServiceProvider extends BaseProvider
     {
         $this->setup(__DIR__)->publishMigrations();
     }
-
 
     public function register()
     {
