@@ -1,26 +1,33 @@
 <?php
 
-    namespace Tshafer\Watchable;
+namespace Tshafer\Watchable;
 
-    use Tshafer\ServiceProvider\ServiceProvider as BaseProvider;
+use Cviebrock\EloquentSluggable\SluggableServiceProvider;
+use Tshafer\ServiceProvider\ServiceProvider as BaseProvider;
+
+/**
+ * Class ServiceProvider.
+ */
+class ServiceProvider extends BaseProvider
+{
 
     /**
-     * Class ServiceProvider.
+     * @var string
      */
-    class ServiceProvider extends BaseProvider
+    protected $packageName = 'watchable';
+
+
+    /**
+     *
+     */
+    public function boot()
     {
-
-        /**
-         * @var string
-         */
-        protected $packageName = 'watchable';
-
-        /**
-         *
-         */
-        public function boot()
-        {
-            $this->setup( __DIR__ )
-                 ->publishMigrations();
-        }
+        $this->setup(__DIR__)->publishMigrations();
     }
+
+
+    public function register()
+    {
+        $this->app->register(SluggableServiceProvider::class);
+    }
+}

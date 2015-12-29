@@ -3,13 +3,13 @@
     namespace Tshafer\Watchable\Models;
 
     use Illuminate\Database\Eloquent\Model;
-    use Tshafer\EloquentSluggable\SluggableInterface as Sluggable;
-    use Tshafer\EloquentSluggable\SluggableTrait;
+    use Cviebrock\EloquentSluggable\SluggableInterface;
+    use Cviebrock\EloquentSluggable\SluggableTrait;
 
     /**
      * Class Watchlist.
      */
-    class Watchlist extends Model implements Sluggable
+    class Watchlist extends Model implements SluggableInterface
     {
 
         use SluggableTrait;
