@@ -1,8 +1,8 @@
 <?php
 
-    namespace Tshafer\Watchable\Models;
+namespace Tshafer\Watchable\Models;
 
-    use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
     use Cviebrock\EloquentSluggable\SluggableInterface;
     use Cviebrock\EloquentSluggable\SluggableTrait;
 
@@ -11,7 +11,6 @@
      */
     class Watchlist extends Model implements SluggableInterface
     {
-
         use SluggableTrait;
 
         /**
@@ -19,36 +18,36 @@
          */
         protected $sluggable = [
             'build_from' => 'title',
-            'save_to'    => 'slug',
+            'save_to' => 'slug',
         ];
 
         /**
          * @return array
          */
-        protected $guarded = [ 'id', 'created_at', 'updated_at' ];
+        protected $guarded = ['id', 'created_at', 'updated_at'];
 
         /**
          * @return \Illuminate\Database\Eloquent\Relations\HasMany
          */
         public function items()
         {
-            return $this->hasMany( WatchlistItem::class );
+            return $this->hasMany(WatchlistItem::class);
         }
 
         /**
          * @return mixed
          */
-        public function addItem( Model $model )
+        public function addItem(Model $model)
         {
-            return ( new WatchlistItem() )->addItem( $this, $model );
+            return ( new WatchlistItem() )->addItem($this, $model);
         }
 
         /**
          * @return mixed
          */
-        public function removeItem( Model $model )
+        public function removeItem(Model $model)
         {
-            return ( new WatchlistItem() )->removeItem( $this, $model );
+            return ( new WatchlistItem() )->removeItem($this, $model);
         }
 
         /**
@@ -56,6 +55,6 @@
          */
         public function author()
         {
-            return $this->morphTo( 'author' );
+            return $this->morphTo('author');
         }
     }

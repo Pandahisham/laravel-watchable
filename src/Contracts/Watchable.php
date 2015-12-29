@@ -1,15 +1,12 @@
 <?php
 
-    namespace Tshafer\Watchable\Contracts;
+namespace Tshafer\Watchable\Contracts;
 
-    /**
-     * Interface Watchable
-     *
-     * @package Tshafer\Watchable\Contracts
+/**
+     * Interface Watchable.
      */
     interface Watchable
     {
-
         /**
          * @return mixed
          */
@@ -20,28 +17,28 @@
          *
          * @return mixed
          */
-        public function getWatchlist( $id );
+        public function getWatchlist($id);
 
         /**
          * @param $slug
          *
          * @return mixed
          */
-        public function getWatchlistBySlug( $slug );
+        public function getWatchlistBySlug($slug);
 
         /**
          * @param $type
          *
          * @return mixed
          */
-        public function getWatchlistByType( $type );
+        public function getWatchlistByType($type);
 
         /**
          * @param $data
          *
          * @return mixed
          */
-        public function createWatchlist( $data );
+        public function createWatchlist($data);
 
         /**
          * @param $id
@@ -49,12 +46,12 @@
          *
          * @return mixed
          */
-        public function updateWatchlist( $id, $data );
+        public function updateWatchlist($id, $data);
 
         /**
          * @param $id
          *
          * @return mixed
          */
-        public function deleteWatchlist( $id );
+        public function deleteWatchlist($id);
     }

@@ -1,24 +1,23 @@
 <?php
 
-    namespace Tshafer\Watchable\Models;
+namespace Tshafer\Watchable\Models;
 
-    use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
     /**
      * Class WatchlistItem.
      */
     class WatchlistItem extends Model
     {
+        /**
+         * @var array
+         */
+        protected $guarded = ['id', 'created_at', 'updated_at'];
 
         /**
          * @var array
          */
-        protected $guarded = [ 'id', 'created_at', 'updated_at' ];
-
-        /**
-         * @var array
-         */
-        protected $with = [ 'watchable' ];
+        protected $with = ['watchable'];
 
         /**
          * @return \Illuminate\Database\Eloquent\Relations\MorphTo
@@ -34,18 +33,18 @@
          *
          * @return static
          */
-        public function addItem( Model $watchlist, Model $watchable )
+        public function addItem(Model $watchlist, Model $watchable)
         {
             $data = [
-                'watchlist_id'   => $watchlist->id,
-                'watchable_id'   => $watchable->id,
-                'watchable_type' => get_class( $watchable ),
+                'watchlist_id' => $watchlist->id,
+                'watchable_id' => $watchable->id,
+                'watchable_type' => get_class($watchable),
             ];
 
-            if ( ! $item = static::where( $data )->first()) {
-                $item = new static( array_except( $data, [ 'watchlist_id' ] ) );
+            if (!$item = static::where($data)->first()) {
+                $item = new static(array_except($data, ['watchlist_id']));
 
-                $watchlist->items()->save( $item );
+                $watchlist->items()->save($item);
             }
 
             return $item;
@@ -57,15 +56,15 @@
          *
          * @return bool
          */
-        public function removeItem( Model $watchlist, Model $watchable )
+        public function removeItem(Model $watchlist, Model $watchable)
         {
             $data = [
-                'watchlist_id'   => $watchlist->id,
-                'watchable_id'   => $watchable->id,
-                'watchable_type' => get_class( $watchable ),
+                'watchlist_id' => $watchlist->id,
+                'watchable_id' => $watchable->id,
+                'watchable_type' => get_class($watchable),
             ];
 
-            if ( ! $item = static::where( $data )->first()) {
+            if (!$item = static::where($data)->first()) {
                 return false;
             }
 
